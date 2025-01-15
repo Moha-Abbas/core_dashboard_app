@@ -1,8 +1,4 @@
-{% load static %}
-<!--<script src="{% static 'core_dashboard_app/workspacedownload.js' %}"></script>-->
-
-<script>
-     document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#downloadnworkspace').addEventListener('click', function(event) {
         event.preventDefault();
         alert('Download started!');
@@ -23,6 +19,7 @@
         }
         const objectIds = Array.from(rows).map(tr => tr.getAttribute('objectid'));
         const payload = { object_ids: objectIds };
+        showLoading();
         fetch('/download-from-workspace/', {
             method: 'POST',
             headers: {
@@ -32,6 +29,7 @@
             body: JSON.stringify(payload),
         })
         .then(response => {
+            hideLoading();
             if (!response.ok) {
                 return response.text().then(text => {
                     throw new Error(text || 'Network response was not ok');
@@ -55,29 +53,8 @@
             });
         })
         .catch(error => {
+            hideLoading();
             alert("Download failed: " + error.message);
         });
     });
 });
-
-</script>
-
-<h1>{{data.title}}</h1>
-
-<div class="d-flex justify-content-end mb-3">
-    <a href="#" id="downloadnworkspace" class="btn btn-primary me-2" style="margin-bottom: 20px;background-color: #3CACA8 ">
-        <i class="fas fa-download"></i> Download Excel
-    </a>
-</div>
-
-<a href="{% url 'core_dashboard_workspaces' %}" class="btn btn-secondary back-to-previous {% if BOOTSTRAP_VERSION|first == "4" %}float-right{% elif BOOTSTRAP_VERSION|first == "5" %}float-end{% endif %}">
-     <i class="fas fa-arrow-left"></i> Previous page
-</a>
-
-{% block box_body %}
-    <div class="tab-content">
-        {% include data.template with objects=data.user_data group='user' %}
-    </div>
-{% endblock %}
-
-

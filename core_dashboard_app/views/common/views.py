@@ -200,7 +200,7 @@ class DashboardWorkspaceTabs(CommonView):
             ]
 
         # Set page title
-        context.update({"page_title": "Dashboard"})
+        context.update({"page_title": "Shared Workspaces"})
         return self.common_render(
             request,
             self.template,
