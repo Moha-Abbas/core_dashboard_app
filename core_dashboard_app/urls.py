@@ -31,6 +31,11 @@ urlpatterns = [
         name="core_dashboard_profile_edit",
     ),
     re_path(
+        r"^my-profile/change-password$",
+        dashboard_common_app_common_views.my_profile_change_password,
+        name="core_dashboard_profile_change_password",
+    ),
+    re_path(
         r"^delete-document",
         ajax.delete_document,
         name="core_dashboard_delete_document",
