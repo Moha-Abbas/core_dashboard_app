@@ -1,4 +1,11 @@
-<h1>{{data.title}}</h1>
+{% load static %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>{{data.title}}</h1>
+    <a href="#" id="downloadworkspace" class="btn btn-primary" style="margin-bottom: 0;">
+        <i class="fas fa-download"></i> Download Excel
+    </a>
+</div>
 
 <a href="{% url 'core_dashboard_workspaces' %}" class="btn btn-secondary back-to-previous {% if BOOTSTRAP_VERSION|first == "4" %}float-right{% elif BOOTSTRAP_VERSION|first == "5" %}float-end{% endif %}">
      <i class="fas fa-arrow-left"></i> Previous page
@@ -9,4 +16,5 @@
         {% include data.template with objects=data.user_data group='user' %}
     </div>
 {% endblock %}
+
 
