@@ -10,6 +10,16 @@
             alert("No Data to download.");
             return;
         }
+        const tbody = table.querySelector('tbody');
+        if (!tbody) {
+            alert("No Data to download.");
+            return;
+        }
+        const rows = tbody.querySelectorAll('tr[objectid]');
+        if (rows.length === 0) {
+            alert("No Data to download.");
+            return;
+        }
         const objectIds = Array.from(rows).map(tr => tr.getAttribute('objectid'));
         const payload = { object_ids: objectIds };
         fetch('/download-from-workspace/', {
