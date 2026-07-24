@@ -41,6 +41,11 @@ urlpatterns = [
         name="core_dashboard_delete_document",
     ),
     re_path(
+        r"^load-form-change-owner",
+        ajax.load_form_change_owner,
+        name="core_dashboard_load_form_change_owner",
+    ),
+    re_path(
         r"^change-owner",
         ajax.change_owner_document,
         name="core_dashboard_change_owner_document",
